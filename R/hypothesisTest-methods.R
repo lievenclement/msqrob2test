@@ -29,9 +29,9 @@
 #' getCoef(rowData(pe[["protein"]])$msqrobModels[[1]])
 #' # Assess log2 fold change between condition c and condition b
 #' L <- makeContrast(
-#'          "conditionc - conditionb=0",
-#'          c("conditionb", "conditionc")
-#'      )
+#'     "conditionc - conditionb=0",
+#'     c("conditionb", "conditionc")
+#' )
 #'
 #' # example SummarizedExperiment instance
 #' se <- pe[["protein"]]
@@ -39,34 +39,40 @@
 #' head(rowData(se)$"conditionc - conditionb", 10)
 #' # Volcano plot
 #' plot(-log10(pval) ~ logFC,
-#'      rowData(se)$"conditionc - conditionb",
-#'      col = (adjPval < 0.05) + 1)
+#'     rowData(se)$"conditionc - conditionb",
+#'     col = (adjPval < 0.05) + 1
+#' )
 #'
 #' # Example for QFeatures instance
 #' # Assess log2 fold change between condition b and condition a (reference class),
 #' # condition c and condition a, and, condition c and condition b.
 #' L <- makeContrast(
-#'                   c("conditionb=0",
-#'                     "conditionc=0",
-#'                     "conditionc - conditionb=0"),
-#'                   c("conditionb", "conditionc")
-#'                   )
+#'     c(
+#'         "conditionb=0",
+#'         "conditionc=0",
+#'         "conditionc - conditionb=0"
+#'     ),
+#'     c("conditionb", "conditionc")
+#' )
 #' pe <- hypothesisTest(pe, i = "protein", L)
 #' head(rowData(pe[["protein"]])$"conditionb", 10)
 #' # Volcano plots
 #' par(mfrow = c(1, 3))
 #' plot(-log10(pval) ~ logFC,
-#'      rowData(pe[["protein"]])$"conditionb",
-#'      col = (adjPval < 0.05) + 1,
-#'      main = "log2 FC b-a")
+#'     rowData(pe[["protein"]])$"conditionb",
+#'     col = (adjPval < 0.05) + 1,
+#'     main = "log2 FC b-a"
+#' )
 #' plot(-log10(pval) ~ logFC,
-#'      rowData(pe[["protein"]])$"conditionc",
-#'      col = (adjPval < 0.05) + 1,
-#'      main = "log2 FC c-a")
+#'     rowData(pe[["protein"]])$"conditionc",
+#'     col = (adjPval < 0.05) + 1,
+#'     main = "log2 FC c-a"
+#' )
 #' plot(-log10(pval) ~ logFC,
-#'      rowData(pe[["protein"]])$"conditionc - conditionb",
-#'      col = (adjPval < 0.05) + 1,
-#'      main = "log2 FC c-b")
+#'     rowData(pe[["protein"]])$"conditionc - conditionb",
+#'     col = (adjPval < 0.05) + 1,
+#'     main = "log2 FC c-b"
+#' )
 #'
 #' # Hurdle method
 #' pe <- msqrobHurdle(pe, i = "protein", formula = ~condition)
@@ -160,9 +166,9 @@ setMethod(
                 countComponent[, seq_len(5)]
             )
 
-            colnames(sam)[seq(2,5)] <- paste0("logFC", colnames(sam)[seq(2,5)])
+            colnames(sam)[seq(2, 5)] <- paste0("logFC", colnames(sam)[seq(2, 5)])
             colnames(sam)[6] <- "logOR"
-            colnames(sam)[seq(7,10)] <- paste0("logOR", colnames(sam)[seq(7,10)])
+            colnames(sam)[seq(7, 10)] <- paste0("logOR", colnames(sam)[seq(7, 10)])
 
             sam$fisher <- -2 * (log(sam[, 5]) + log(sam[, 10]))
             sam$fisherDf <- 4
@@ -201,7 +207,7 @@ setMethod(
     resultsColumnNamePrefix = "",
     overwrite = FALSE) {
         if (is.null(object[[i]])) stop("QFeatures object does not contain an assay with the name ", i)
-        if (!(modelColumn %in% colnames(rowData(object[[i]])))) stop(There is no column named \'", modelColumn, "\' with stored models of an msqrob fit in the rowData of assay ", i, "of the QFeatures object.")
+        if (!(modelColumn %in% colnames(rowData(object[[i]])))) stop("There is no column named \'", modelColumn, "\' with stored models of an msqrob fit in the rowData of assay ", i, "of the QFeatures object.")
         if (is.null(colnames(contrast)) & resultsColumnNamePrefix == "") resultsColumnNamePrefix <- "msqrobResults"
         if (is.null(colnames(contrast)) & ncol(contrast) > 1) colnames(contrast) <- seq_len(ncol(contrast))
         if ((sum(paste0(resultsColumnNamePrefix, colnames(contrast)) %in% colnames(rowData(object[[i]]))) > 0) & !overwrite) stop("There is/are already column(s) with names starting with", resultsColumnNamePrefix, "\' in the rowData of assay ", i, " of the QFeatures object, set the argument overwrite=TRUE to replace the column(s) with the new results or use another name for the argument resultsColumnNamePrefix")
@@ -244,9 +250,9 @@ setMethod(
                 countComponent[, seq_len(5)]
             )
 
-            colnames(sam)[seq(2,5)] <- paste0("logFC", colnames(sam)[seq(2,5)])
+            colnames(sam)[seq(2, 5)] <- paste0("logFC", colnames(sam)[seq(2, 5)])
             colnames(sam)[6] <- "logOR"
-            colnames(sam)[seq(7,10)] <- paste0("logOR", colnames(sam)[seq(7,10)])
+            colnames(sam)[seq(7, 10)] <- paste0("logOR", colnames(sam)[seq(7, 10)])
 
             sam$fisher <- -2 * (log(sam[, 5]) + log(sam[, 10]))
             sam$fisherDf <- 4

@@ -398,7 +398,7 @@ msqrobLmer <- function(y,
     hlp <- limma::squeezeVar(
         var = vapply(models, getVar, numeric(1)),
         df = vapply(models, getDF, numeric(1))
-        )
+    )
 
     for (i in seq_len(length(models))) {
         models[[i]]@varPosterior <- as.numeric(hlp$var.post[i])
@@ -516,10 +516,12 @@ msqrobLmer <- function(y,
 #' pe
 #'
 #' # Fit MSqrob model using robust regression with the MASS rlm function
-#' models <- msqrobGlm(aggcounts(pe[["protein"]]),
-#'                     rowData(pe[["protein"]])[[".n"]],
-#'                     ~condition,
-#'                     colData(pe))
+#' models <- msqrobGlm(
+#'     aggcounts(pe[["protein"]]),
+#'     rowData(pe[["protein"]])[[".n"]],
+#'     ~condition,
+#'     colData(pe)
+#' )
 #' getCoef(models[[1]])
 #' @return A list of objects of the `StatModel` class.
 #'
@@ -584,7 +586,7 @@ msqrobGlm <- function(y,
     hlp <- limma::squeezeVar(
         var = vapply(models, getVar, numeric(1)),
         df = vapply(models, getDF, numeric(1))
-        )
+    )
 
     for (i in seq_len(length(models))) {
         models[[i]]@varPosterior <- as.numeric(hlp$var.post[i])

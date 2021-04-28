@@ -39,9 +39,10 @@
 #' cbind(getCoef(rowData(pe[["protein"]])$rlm[[1]]), getCoef(rowData(pe[["protein"]])$ridge[[1]]))
 #'
 #' # compare for ecoli protein (DE)==> almost no shrinkage to zero
-#' cbind(getCoef(rowData(pe[["protein"]])$rlm[["P00956"]]),
-#'       getCoef(rowData(pe[["protein"]])$ridge[["P00956"]]))
-#'
+#' cbind(
+#'     getCoef(rowData(pe[["protein"]])$rlm[["P00956"]]),
+#'     getCoef(rowData(pe[["protein"]])$ridge[["P00956"]])
+#' )
 #' @param object `SummarizedExperiment` or `QFeatures` instance
 #'
 #' @param formula Model formula. The model is built based on the
@@ -111,17 +112,17 @@ setMethod(
                 maxitRob = maxitRob
             )
         } else {
-              rowData(object)[[modelColumnName]] <- msqrobLmer(
-                  y = assay(object),
-                  formula = formula,
-                  data = colData(object),
-                  robust = robust,
-                  maxitRob = maxitRob,
-                  tol = tol,
-                  doQR = doQR,
-                  lmerArgs = lmerArgs
-              )
-          }
+            rowData(object)[[modelColumnName]] <- msqrobLmer(
+                y = assay(object),
+                formula = formula,
+                data = colData(object),
+                robust = robust,
+                maxitRob = maxitRob,
+                tol = tol,
+                doQR = doQR,
+                lmerArgs = lmerArgs
+            )
+        }
         return(object)
     }
 )
@@ -164,17 +165,17 @@ setMethod(
                 maxitRob = maxitRob
             )
         } else {
-              rowData(object[[i]])[[modelColumnName]] <- msqrobLmer(
-                  y = assay(object[[i]]),
-                  formula = formula,
-                  data = colData(object),
-                  robust = robust,
-                  maxitRob = maxitRob,
-                  tol = tol,
-                  doQR = doQR,
-                  lmerArgs = lmerArgs
-              )
-          }
+            rowData(object[[i]])[[modelColumnName]] <- msqrobLmer(
+                y = assay(object[[i]]),
+                formula = formula,
+                data = colData(object),
+                robust = robust,
+                maxitRob = maxitRob,
+                tol = tol,
+                doQR = doQR,
+                lmerArgs = lmerArgs
+            )
+        }
         return(object)
     }
 )

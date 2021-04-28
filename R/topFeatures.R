@@ -45,13 +45,15 @@
 
 topFeatures <- function(models, contrast, adjust.method = "BH", sort = TRUE, alpha = 1) {
     logFC <- vapply(models,
-                    getContrast,
-                    numeric(ncol(contrast)),
-                    L = contrast)
+        getContrast,
+        numeric(ncol(contrast)),
+        L = contrast
+    )
     se <- sqrt(vapply(models,
-                      varContrast,
-                      numeric(ncol(contrast)),
-                      L = contrast))
+        varContrast,
+        numeric(ncol(contrast)),
+        L = contrast
+    ))
     df <- vapply(models, getDfPosterior, numeric(1))
     t <- logFC / se
     pval <- pt(-abs(t), df) * 2
