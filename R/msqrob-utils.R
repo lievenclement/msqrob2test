@@ -562,10 +562,11 @@ makeContrast <- function(contrasts, parameterNames) {
     }, enum = function(x) {
         paste0("'", x, "'", collapse = ", ")
     }, fatal = function(name, ...) {
-        stop(paste0(
+        stop(
             "msqrob2:::.expression2coef::walkCode::",
-            name
-        ), ": ", ..., call. = FALSE)
+            name, ": ", ...,
+            call. = FALSE
+        )
     }, trace = function(fn, v, w) {
         message(
             fn, ": v = ", sQuote(v), ", mode = ", mode(v),
@@ -576,7 +577,7 @@ makeContrast <- function(contrasts, parameterNames) {
     if (any(idx <- is.numeric(effects))) {
         stop("msqrob2:::.expression2coef: The lhs expression ",
             sQuote(deparse(m.lhs)), " ", "contains a numeric offset term evaluating to ",
-            paste0(effects[idx], collapse = ", "), ". ", "This is either an internal error or a misspecification from your part. ",
+            paste0(effects[idx], collapse = ", "), ". ", "This is either an internal flaw or a misspecification from your part. ",
             "If so, please pull these offsets to the right-hand side of the equation",
             call. = FALSE
         )

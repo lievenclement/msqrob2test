@@ -153,7 +153,7 @@ setMethod(
         if (sum(paste0(modelColumn, c("Intensity", "Count")) %in% colnames(rowData(object))) != 2) stop("There are no columns for the models of the hurdle components in the rowData of the SummarizedExperiment")
         if (is.null(colnames(contrast)) & resultsColumnNamePrefix == "hurdle_") resultsColumnNamePrefix <- "hurdleResults"
         if (is.null(colnames(contrast)) & ncol(contrast) > 1) colnames(contrast) <- seq_len(ncol(contrast))
-        if ((sum(paste0(resultsColumnNamePrefix, colnames(contrast)) %in% colnames(rowData(object))) > 0) & !overwrite) stop("There is/are already column(s) with names starting with'", resultsColumnNamePrefix, "\' in the rowData of the SummarizedExperiment object, set the argument overwrite=TRUE to replace the column(s) with the new results or use another name for the argument resultsColumnNamePrefix")
+        if ((sum(paste0(resultsColumnNamePrefix, colnames(contrast)) %in% colnames(rowData(object))) > 0) & !overwrite) stop("There is/are already column(s) with names starting with\'", resultsColumnNamePrefix, "\' in the rowData of the SummarizedExperiment object, set the argument overwrite=TRUE to replace the column(s) with the new results or use another name for the argument resultsColumnNamePrefix")
         for (j in seq_len(ncol(contrast)))
         {
             contrHlp <- contrast[, j]

@@ -66,7 +66,7 @@ setMethod(
     overwrite = FALSE,
     priorCount = .1,
     binomialBound = TRUE) {
-        if (ncol(colData(object)) == 0) stop("error: colData is empty")
+        if (ncol(colData(object)) == 0) stop("colData is empty")
         if ((modelColumnName %in% colnames(rowData(object))) & !overwrite) {
             stop(
                 "There is already a column named \'",

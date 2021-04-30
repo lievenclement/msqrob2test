@@ -251,7 +251,7 @@ msqrobLmer <- function(y,
     df$fixed <- fixed
 
     if (sum(!grepl("(Intercept)", colnames(fixed))) < 2 & nobars(formula)[[2]] != 1) {
-        stop("Error: the mean model must have more than two parameters for ridge regression.
+        stop("The mean model must have more than two parameters for ridge regression.
               if you really want to adopt ridge regression when your factor has only two levels
               rerun the function with a formula where you drop the intercept. e.g. ~-1+condition
             ")

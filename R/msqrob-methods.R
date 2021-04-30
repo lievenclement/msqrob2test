@@ -95,7 +95,7 @@ setMethod(
     tol = 1e-6,
     doQR = TRUE,
     lmerArgs = list(control = lmerControl(calc.derivs = FALSE))) {
-        if (ncol(colData(object)) == 0) stop("error: colData is empty")
+        if (ncol(colData(object)) == 0) stop("colData is empty")
         if ((modelColumnName %in% colnames(rowData(object))) & !overwrite) {
             stop(
                 "There is already a column named \'",
